@@ -46,7 +46,7 @@ public class VroomVroomLoginTest extends BaseTest {
     }
 
     @Test
-    @Order(4)
+    @Order(3)
     @DisplayName("Show validation error when email is empty")
     void testEmptyEmailValidation() {
         loginPage.navigate();
@@ -59,7 +59,7 @@ public class VroomVroomLoginTest extends BaseTest {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     @DisplayName("Show validation error when password is empty")
     void testEmptyPasswordValidation() {
         loginPage.navigate();
@@ -72,7 +72,7 @@ public class VroomVroomLoginTest extends BaseTest {
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     @DisplayName("Show validation error when both fields are empty")
     void testBothFieldsEmptyValidation() {
         loginPage.navigate();

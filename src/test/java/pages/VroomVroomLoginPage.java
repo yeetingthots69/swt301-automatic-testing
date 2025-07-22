@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VroomVroomLoginPage extends BasePage {
 
@@ -12,6 +13,9 @@ public class VroomVroomLoginPage extends BasePage {
     private By emailInput = By.id("email");
     private By passwordInput = By.id("password");
     private By submitButton = By.cssSelector("button[type='submit']");
+    private By profileIcon = By.xpath("/html/body/div/div[1]/header/div/div/button[2]/span/span");
+    private By profileItem = By.xpath("/html/body/div[2]/div/a[1]");
+    private By successToastCloseButton = By.xpath("/html/body/div/div[2]/ol/li/button");
 
     // Toasts
     private By successToast = By.xpath("//div[contains(text(), 'Login Successful')]");
@@ -36,6 +40,18 @@ public class VroomVroomLoginPage extends BasePage {
         return errorToast;
     }
 
+    public By getProfileIconLocator() {
+        return profileIcon;
+    }
+
+    public By getProfileItemLocator() {
+        return profileItem;
+    }
+
+    public By getSuccessToastCloseButtonLocator() {
+        return successToastCloseButton;
+    }
+
     public void clearEmail() {
         driver.findElement(emailInput).clear();
     }
@@ -54,6 +70,28 @@ public class VroomVroomLoginPage extends BasePage {
 
     public void clickLogin() {
         click(submitButton);
+    }
+
+    public void clickProfileIcon() {
+        click(profileIcon);
+    }
+
+    public void clickProfileItem() {
+        click(profileItem);
+    }
+
+    public void dismissSuccessToast() {
+        if (isElementVisible(successToast)) {
+            // Hover over the toast to reveal the close button
+            hoverOverElement(successToast);
+
+            // Wait for close button to appear and click it
+            wait.until(ExpectedConditions.elementToBeClickable(successToastCloseButton));
+            click(successToastCloseButton);
+
+            // Wait for toast to disappear
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(successToast));
+        }
     }
 
     // Use JavaScript to check validity

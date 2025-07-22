@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,9 +35,9 @@ public class BasePage {
     // Click safely to avoid ads
     protected void click(By locator) {
         scrollToElement(locator);
-        WebElement element = waitForVisibility(locator);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-        // waitForVisibility(locator).click();
+//        WebElement element = waitForVisibility(locator);
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        waitForVisibility(locator).click();
     }
 
     // Send keys safely
@@ -63,5 +64,11 @@ public class BasePage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    protected void hoverOverElement(By locator) {
+        WebElement element = driver.findElement(locator);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
     }
 }
